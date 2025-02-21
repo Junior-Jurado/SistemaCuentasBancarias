@@ -10,6 +10,7 @@ namespace SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository
     {
         //Aquí se deben de ir agregando los diferentes repositorios
         IServicioRepository Servicio { get; }
+        IArticuloRepository Articulo { get; }
 
         void Save();
     }

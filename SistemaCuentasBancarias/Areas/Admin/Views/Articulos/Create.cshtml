@@ -1,0 +1,68 @@
+﻿@model SistemaCuentasBancarias.Models.ViewModels.ArticuloVM
+
+@{
+	ViewData["Title"] = "Crear Artículo";
+}
+
+<br />
+<br />
+<h3 class="text-center">Crear un nuevo artículo</h3>
+<form method="post" asp-action="Create">
+	<div class="row px-2 offset-1 border">
+		<div asp-validation-summary="All" class="text-danger"></div>
+
+		<div class="col-10" offset-1 mt-4>
+			<div class="form-group row">
+				<div class="col-4">
+					<label asp-for="Articulo.Nombre"></label>
+				</div>
+				<div class="col-8">
+					<input asp-for="Articulo.Nombre" class="form-control" placeholder="Ingresa el nombre" />
+					<span asp-validation-for="Articulo.Nombre" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+
+			<div class="form-group row">
+				<div class="col-4">
+					<label asp-for="Articulo.Descripcion"></label>
+				</div>
+				<div class="col-8">
+					<input asp-for="Articulo.Descripcion" class="form-control" placeholder="Ingresa la descripción" />
+					<span asp-validation-for="Articulo.Descripcion" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<br />
+
+
+			<div class="form-group row">
+				<div class="col-4">
+					<label for="Servicio">Servicio</label>
+				</div>
+				<div class="col-8">
+					@Html.DropDownListFor(m => m.Articulo.ServicioId, Model.ListaServicios,
+											"-Por favor selecciona un servicio-", new { @class = "form-control" })
+					<span asp-validation-for="Articulo.ServicioId" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<br />
+
+			<div class="form-group-row">
+				<div class="col-8">
+					<partial name="_VistaCrearVolver" />
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
