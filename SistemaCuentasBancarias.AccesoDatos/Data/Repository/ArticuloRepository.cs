@@ -16,7 +16,6 @@ namespace SistemaCuentasBancarias.AccesoDatos.Data.Repository
         public ArticuloRepository(ApplicationDbContext db) : base(db) 
         {
             _db = db;
-            
         }
 
         public void Update(Articulo articulo)

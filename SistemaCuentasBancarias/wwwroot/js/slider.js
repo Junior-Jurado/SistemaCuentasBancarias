@@ -5,39 +5,46 @@ $(document).ready(function () {
 });
 
 function cargarDatable() {
-    dataTable = $("#tblArticulos").DataTable({
+    dataTable = $("#tblSliders").DataTable({
         "ajax": {
-            "url": "/admin/articulos/GetAll",
+            "url": "/admin/sliders/GetAll",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data" : "id", "width": "5%" },
-            { "data" : "nombre", "width": "20%" },
-            { "data": "servicio.nombre", "width": "15%" },
+            { "data": "id", "width": "5%" },
+            { "data": "nombre", "width": "20%" },
+
+            /* Empieza Edición Estado*/
             {
-                "data": "urlImagen", 
+                "data": "estado",
+                "render": function (estadoActual) {
+                    return estadoActual ? "Activo" : "Inactivo";
+                }
+            },
+            /* Termina Edición Estado*/
+            {
+                "data": "urlImagen",
                 "render": function (imagen) {
                     return `<img src="../${imagen}" width="120"/>`;
                 }
             },
-            { "data" : "fechaCreacion", "width": "30%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                                <a href="/Admin/Articulos/Edit/${data}" class="btn btn-success text-white" style="cursor:pointer; width:140px;">
+                                <a href="/Admin/Sliders/Edit/${data}" class="btn btn-success text-white" style="cursor:pointer; width:140px;">
                                     <i class="far fa-edit"></i>
                                     Editar
                                 </a>
                                 &nbsp;
-                                <a onclick=Delete("/Admin/Articulos/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer; width:140px;">
+                                <a onclick=Delete("/Admin/Sliders/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer; width:140px;">
                                     <i class="far fa-trash-alt"></i>
                                     Borrar
                                 </a>
                             </div>
                     `;
-                }, "width" : "30%"
+                }, "width": "30%"
             }
         ],
         "language": {

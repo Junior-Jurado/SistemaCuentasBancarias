@@ -1,30 +1,29 @@
 ﻿@{
-	ViewData["Title"] = "Lista de Artículos";
+	ViewData["Title"] = "Lista de Sliders";
 }
 
 <div class="container mt-4">
 	<div class="row">
 		<div class="col-8">
-			<h2 class="text-primary">Lista de Artículos</h2>
+			<h2 class="text-primary">Lista de Sliders</h2>
 		</div>
 		<div class="col-4 text-right">
 			<a asp-action="Create" class="btn btn-primary">
 				<i class="fa-solid fa-plus"></i>
-				Crear Nuevo Artículo
+				Crear Nuevo Slider
 			</a>
 		</div>
 	</div>
 
 	<br />
 	<br />
-	<table id="tblArticulos" class="table table-striped table-bordered" style="width: 100%">
+	<table id="tblSliders" class="table table-striped table-bordered" style="width: 100%">
 		<thead>
 			<tr>
 				<th>Id</th>
 				<th>Nombre</th>
-				<th>Servicio</th>
+				<th>Estado</th>
 				<th>Imagen</th>
-				<th>Fecha de Creación</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -32,5 +31,5 @@
 </div>
 
 @section Scripts {
-	<script src="~/js/articulo.js"></script>
+	<script src="~/js/slider.js"></script>
 }

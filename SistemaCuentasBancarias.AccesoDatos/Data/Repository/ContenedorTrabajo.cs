@@ -17,10 +17,13 @@ namespace SistemaCuentasBancarias.AccesoDatos.Data.Repository
             _db = db;
             Servicio = new ServicioRepository(_db);
             Articulo = new ArticuloRepository(_db);
+            Slider = new SliderRepository(_db);
         }
 
         public IServicioRepository Servicio {  get; private set; }
-        public IArticuloRepository Articulo{  get; private set; }
+        public IArticuloRepository Articulo {  get; private set; }
+
+        public ISliderRepository Slider { get; private set; }
 
         public void Dispose()
         {

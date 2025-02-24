@@ -1,0 +1,78 @@
+﻿@model SistemaCuentasBancarias.Models.Slider
+
+@{
+	ViewData["Title"] = "Editar Slider";
+}
+
+<br />
+<br />
+<h3 class="text-center">Editar Slider</h3>
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+
+	<!-- Se envía el ID del artículo como campo oculto -->
+	<input type="hidden" asp-for="Id" />
+	<div class="row px-2 border">
+		<div asp-validation-summary="All" class="text-danger"></div>
+
+		<div class="col-8 mt-4" offset-1 mt-4>
+			<div class="form-group row">
+				<div class="col-4">
+					<label asp-for="Nombre"></label>
+				</div>
+				<div class="col-8">
+					<input asp-for="Nombre" class="form-control" placeholder="Ingresa el nombre" />
+					<span asp-validation-for="Nombre" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+
+			<div class="form-group row">
+				<div class="col-4">
+					<label asp-for="Estado"></label>
+				</div>
+				<div class="col-8">
+					<input type="checkbox" asp-for="Estado"/> ¿Activo?
+					<span asp-validation-for="Estado" class="text-danger"></span>
+				</div>
+			</div>
+
+
+			<br />
+
+
+			<div class="form-group row">
+				<div class="col-4">
+					<label asp-for="UrlImagen"></label>
+				</div>
+				<div class="col-8">
+					<input type="file" name="archivos" id="subidaArchivo" class="form-control" />
+					<span asp-validation-for="UrlImagen" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<br />
+
+			<div class="row">
+				<div class="col">
+					<button type="submit" class="btn btn-primary form-control">Editar Artículo</button>
+				</div>
+				&nbsp;
+				<div class="col">
+					<a asp-action="Index" class="btn btn-success form-control">Volver atrás</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4 pt-3">
+			<img src="@Model.UrlImagen" width="300px" style="border-radius: 5px; border:1px solid #bbb9b9" />
+		</div>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

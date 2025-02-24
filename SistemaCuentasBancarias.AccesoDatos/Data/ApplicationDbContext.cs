@@ -14,5 +14,6 @@ namespace SistemaCuentasBancarias.Data
         // Poner aquí todos los modelos
         public DbSet<Servicio> Servicio { get; set; }
         public DbSet<Articulo> Articulo { get; set; }
+        public DbSet<Slider> Slider { get; set; }
     }
 }

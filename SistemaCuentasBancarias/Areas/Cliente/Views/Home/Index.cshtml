@@ -1,8 +1,38 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model SistemaCuentasBancarias.Models.ViewModels.HomeVM
+@{
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+
+<div class="row mt-1">
+    <div class="col-sm-12">
+        <h1 class="text-center text-dark bg-secondary py-1">Últimas Novedades</h1>
+    </div>
 </div>
+
+@if (Model.Articulos.Count() > 0)
+{
+    <hr />
+    <div class="row">
+        @foreach (var articulo in Model.Articulos.OrderBy(o => o.Id))
+        {
+            <div class="col-4">
+                <div class="card">
+                    <img src="@articulo.UrlImagen" class="img-thumbnail" width="100%"/>
+                    <div class="card-body">
+                        <h5 class="text-center">@articulo.Nombre</h5>
+                        <a asp-action="Detalle" asp-route-id="@articulo.Id" class="btn btn-success text-center" style="border:10px">
+                            Más información
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No hay artículos</p>
+}

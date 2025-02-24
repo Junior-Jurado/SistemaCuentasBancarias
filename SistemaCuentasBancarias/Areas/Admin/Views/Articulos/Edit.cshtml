@@ -1,17 +1,20 @@
 ﻿@model SistemaCuentasBancarias.Models.ViewModels.ArticuloVM
 
 @{
-	ViewData["Title"] = "Crear Artículo";
+	ViewData["Title"] = "Editar Artículo";
 }
 
 <br />
 <br />
-<h3 class="text-center">Crear un nuevo artículo</h3>
-<form method="post" asp-action="Create" enctype="multipart/form-data">
-	<div class="row px-2 offset-1 border">
+<h3 class="text-center">Editar artículo</h3>
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+
+	<!-- Se envía el ID del artículo como campo oculto -->
+	<input type="hidden" asp-for="Articulo.Id" />
+	<div class="row px-2 border">
 		<div asp-validation-summary="All" class="text-danger"></div>
 
-		<div class="col-10" offset-1 mt-4>
+		<div class="col-8 mt-4" offset-1 mt-4>
 			<div class="form-group row">
 				<div class="col-4">
 					<label asp-for="Articulo.Nombre"></label>
@@ -34,7 +37,7 @@
 				</div>
 			</div>
 
-			
+
 			<br />
 
 
@@ -56,7 +59,7 @@
 					<label asp-for="Articulo.UrlImagen"></label>
 				</div>
 				<div class="col-8">
-					<input type="file" name="archivos" id="subidaArchivo" class="form-control"/>
+					<input type="file" name="archivos" id="subidaArchivo" class="form-control" />
 					<span asp-validation-for="Articulo.UrlImagen" class="text-danger"></span>
 				</div>
 			</div>
@@ -64,11 +67,19 @@
 			<br />
 			<br />
 
-			<div class="form-group-row">
-				<div class="col-8">
-					<partial name="_VistaCrearVolver" />
+			<div class="row">
+				<div class="col">
+					<button type="submit" class="btn btn-primary form-control">Editar Artículo</button>
+				</div>
+				&nbsp;
+				<div class="col">
+					<a asp-action="Index" class="btn btn-success form-control">Volver atrás</a>
 				</div>
 			</div>
+		</div>
+
+		<div class="col-4 pt-3">
+			<img src="@Model.Articulo.UrlImagen" width="300px" style="border-radius: 5px; border:1px solid #bbb9b9"/>
 		</div>
 	</div>
 </form>

@@ -1,22 +1,34 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository;
 using SistemaCuentasBancarias.Models;
+using SistemaCuentasBancarias.Models.ViewModels;
 
 namespace SistemaCuentasBancarias.Areas.Cliente.Controllers
 {
     [Area("Cliente")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IContenedorTrabajo _contedorTrabajo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IContenedorTrabajo contedorTrabajo)
         {
-            _logger = logger;
+            _contedorTrabajo = contedorTrabajo;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            HomeVM homeVM = new HomeVM()
+            {
+                Sliders = _contedorTrabajo.Slider.GetAll(),
+                Articulos = _contedorTrabajo.Articulo.GetAll()
+            };
+
+            // Esta línea es para poder saber si estamos en el Home o No
+            ViewBag.IsHome = true;
+
+            return View(homeVM);
         }
 
         public IActionResult Privacy()

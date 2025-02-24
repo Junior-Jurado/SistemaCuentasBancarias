@@ -1,0 +1,54 @@
+﻿@model SistemaCuentasBancarias.Models.ViewModels.HomeVM
+<!-- Slider -->
+<div id="sliderImagenes" class="carousel slide">
+    @* <div class="carousel-indicators"> *@
+    @*     @{ *@
+    @*         int contadorIndicadores = 0; *@
+    @*     } *@
+    @*     @foreach (var slider in Model.Sliders) *@
+    @*     { *@
+    @*         if (slider.Estado) *@
+    @*         { *@
+    @*             <button type="button" *@
+    @*                     data-bs-target="#sliderImagenes" *@
+    @*                     data-bs-slide-to="@contadorIndicadores" *@
+    @*                     class="@(contadorIndicadores == 0 ? "active" : "")" *@
+    @*                     aria-current="@(contadorIndicadores == 0 ? "true" : "false")" *@
+    @*                     aria-label="Slide @(contadorIndicadores + 1)"> *@
+    @*             </button> *@
+    @*             contadorIndicadores++; *@
+    @*         } *@
+    @*     } *@
+    @* </div> *@
+    <div class="carousel-inner">
+
+        @{
+            int contador = 0;
+        }
+
+        @foreach (var slider in Model.Sliders)
+        {
+            var itemDinamico = contador++ == 0 ? "active" : "";
+
+            @if (slider.Estado)
+            {
+                <div class="carousel-item @itemDinamico">
+					<img src="@Url.Content(slider.UrlImagen)" class="d-block w-100">
+                    <h1 class="text-white text-center bg-dark py-1">@Html.Raw(slider.Nombre)</h1>
+                </div>
+            }
+        }
+            
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#sliderImagenes" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#sliderImagenes" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<!-- Slider -->
