@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaCuentasBancarias.AccesoDatos.Data.Repository;
 using SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository;
 using SistemaCuentasBancarias.Data;
+using SistemaCuentasBancarias.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,11 +13,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultUI();
 builder.Services.AddControllersWithViews();
 
-//Agregar contenedor de trabajo al contenedor IoC de inyección de dependencias
+//Agregar contenedor de trabajo al contenedor IoC de inyecciï¿½n de dependencias
 builder.Services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
 
 var app = builder.Build();

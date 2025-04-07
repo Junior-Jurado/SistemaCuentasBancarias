@@ -12,6 +12,7 @@ namespace SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository
         IServicioRepository Servicio { get; }
         IArticuloRepository Articulo { get; }
         ISliderRepository Slider { get; }
+        IUsuarioRepository Usuario { get; }
 
         void Save();
     }

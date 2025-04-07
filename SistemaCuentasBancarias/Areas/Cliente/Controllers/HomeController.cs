@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.JsonPatch.Internal;
 using Microsoft.AspNetCore.Mvc;
 using SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository;
 using SistemaCuentasBancarias.Models;
@@ -29,6 +30,36 @@ namespace SistemaCuentasBancarias.Areas.Cliente.Controllers
             ViewBag.IsHome = true;
 
             return View(homeVM);
+        }
+
+        // Para buscador
+        [HttpGet]
+        public IActionResult ResultadoBusqueda(string searchString, int page = 1, int pageSize = 6)
+        {
+            var articulos = _contedorTrabajo.Articulo.AsQueryable();
+
+            // Filtrar por título si hay un término de búsqueda
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                articulos = articulos.Where(a => a.Nombre.Contains(searchString));
+            }
+
+            // Paginar los resultados
+            var paginatedEntries = articulos.Skip((page-1) * pageSize).Take(pageSize);
+
+            // Crear el modelo para la vista
+            var model = new ListaPaginada<Articulo>(paginatedEntries.ToList(), articulos.Count(), page, pageSize, searchString);
+
+            return View(model);
+        }
+        public IActionResult Detalle(int id)
+        {
+            var articulo = _contedorTrabajo.Articulo.GetFirstOrDefault(a => a.Id == id);
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+            return View(articulo);
         }
 
         public IActionResult Privacy()

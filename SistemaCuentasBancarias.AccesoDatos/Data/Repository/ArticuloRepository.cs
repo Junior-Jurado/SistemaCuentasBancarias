@@ -18,6 +18,11 @@ namespace SistemaCuentasBancarias.AccesoDatos.Data.Repository
             _db = db;
         }
 
+        public IQueryable<Articulo> AsQueryable()
+        {
+            return _db.Set<Articulo>().AsQueryable();
+        }
+
         public void Update(Articulo articulo)
         {
             var objDesdeDb = _db.Articulo.FirstOrDefault(s => s.Id == articulo.Id);

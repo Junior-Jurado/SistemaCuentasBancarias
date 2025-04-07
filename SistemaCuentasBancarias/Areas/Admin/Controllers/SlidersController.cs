@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository;
 using SistemaCuentasBancarias.Models;
 
 namespace SistemaCuentasBancarias.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Area("Admin")]
     public class SlidersController : Controller
     {
@@ -137,6 +139,14 @@ namespace SistemaCuentasBancarias.Areas.Admin.Controllers
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error borrando slider" });
+            }
+
+            string rutaPrincipal = _hostingEnviroment.WebRootPath;
+            var rutaImagen = Path.Combine(rutaPrincipal, objFromDb.UrlImagen.TrimStart('\\'));
+
+            if (System.IO.File.Exists(rutaImagen))
+            {
+                System.IO.File.Delete(rutaImagen);
             }
 
             _contenedorTrabajo.Slider.Remove(objFromDb);

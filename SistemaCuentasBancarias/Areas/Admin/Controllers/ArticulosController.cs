@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository;
 using SistemaCuentasBancarias.Models;
 using SistemaCuentasBancarias.Models.ViewModels;
 
 namespace SistemaCuentasBancarias.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Area("Admin")]
     public class ArticulosController : Controller
     {

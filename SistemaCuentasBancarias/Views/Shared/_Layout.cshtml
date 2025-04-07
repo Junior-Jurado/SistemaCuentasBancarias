@@ -18,7 +18,7 @@
     <header>
 
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="#">Navbar</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,19 +31,23 @@
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrar Contenidos</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Servicios" asp-action="Index">Servicios</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Articulos" asp-action="Index">Artículos</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Sliders" asp-action="Index">Sliders</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                            </div>
-                        </li>
+                        <!-- Autorización -->
+                        @if (User.IsInRole(CNT.Administrador))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrar Contenidos</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Servicios" asp-action="Index">Servicios</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Articulos" asp-action="Index">Artículos</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Sliders" asp-action="Index">Sliders</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                </div>
+                            </li>
+                        }
+                        
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-sm-2" type="search" placeholder="Palabras a buscar ...">
+                    <form class="d-flex" asp-controller="Home" asp-action="ResultadoBusqueda" method="get">
+                        <input class="form-control me-sm-4 text-dark" type="text" name="searchString" placeholder="Texto a buscar">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                 </div>

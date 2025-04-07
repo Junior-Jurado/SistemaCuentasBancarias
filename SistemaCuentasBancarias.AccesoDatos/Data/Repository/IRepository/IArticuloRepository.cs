@@ -12,6 +12,7 @@ namespace SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository
     {
         void Update(Articulo articulo);
 
-        
+        // Método para el buscador
+        IQueryable<Articulo> AsQueryable();
     }
 }

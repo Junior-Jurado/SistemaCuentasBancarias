@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SistemaCuentasBancarias.AccesoDatos.Data.Repository.IRepository;
 using SistemaCuentasBancarias.Data;
 using SistemaCuentasBancarias.Models;
 
 namespace SistemaCuentasBancarias.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Area("Admin")]
     public class ServiciosController : Controller
     {
@@ -14,7 +16,7 @@ namespace SistemaCuentasBancarias.Areas.Admin.Controllers
         {
             _contenedorTrabajo = contenedorTrabajo;
         }
-
+        //[AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
